@@ -113,7 +113,8 @@ for k=1:ngg
 end
 fprintf(' \n')
 disp([t, del])
-h=figure; figure(h)
+h=figure("Name", figure_title); 
+figure(h)
 plot(t, del)
 title(['Phase angle difference (fault cleared at ', num2str(tc),'s)'])
 xlabel('t, sec'), ylabel('Delta, degree'), grid

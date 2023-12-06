@@ -29,7 +29,7 @@ classdef PowerSystem < WorkspaceMapper
             obj.import()
         end
 
-        function solve_stability(obj, nf, tc, tf, fline)  
+        function solve_stability(obj, nf, tc, tf, fline, figure_title) 
             obj.reset()
             obj.build()
             obj.solve_flow()
@@ -37,6 +37,7 @@ classdef PowerSystem < WorkspaceMapper
             nf = nf;
             tf = tf;
             fline = fline;
+            figure_title = figure_title;
             % Script execution
             obj.export()
             trstab
