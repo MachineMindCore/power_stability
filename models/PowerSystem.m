@@ -11,11 +11,11 @@ classdef PowerSystem < WorkspaceMapper
             %SYSTEM Construct an instance of this class
             %   Detailed explanation goes here
             obj.data_script = data_script;
-            eval(data_script);
-            obj.import();
+            obj.build()
         end
 
         function build(obj)
+            eval(obj.data_script);
             obj.export()
             lfybus
             obj.import()
@@ -23,28 +23,24 @@ classdef PowerSystem < WorkspaceMapper
 
         function solve_flow(obj)
             obj.build()
+            % Script execution
             obj.export()
             lfnewton
             obj.import()
         end
 
         function solve_stability(obj, nf, tc, tf, fline)  
+            obj.reset()
+            obj.build()
             obj.solve_flow()
-            obj.export()
-            tc_interval = [0, tf/2];
+            tc = tc;
             nf = nf;
             tf = tf;
             fline = fline;
-
+            % Script execution
+            obj.export()
             trstab
             obj.import()
-        end
-
-        function bool_arr = is_stable(obj)
-            obj.export()
-            for i=1:length(del)
-                delta_convergence(t, delta)
-            end
         end
 
         function show_flow(obj)
@@ -52,8 +48,8 @@ classdef PowerSystem < WorkspaceMapper
             busout
         end
 
-        function show_stability(obj)
-            obj.export()
+        function reset(obj)
+            obj.dinamic_properties = struct();
         end
     end
 end
